@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 // Data needed for a later exercise
 // const flights =
@@ -1662,3 +1662,54 @@
 // //   else return n + count(n + 3);
 // }
 // console.log(count(1));
+
+// using call()
+function greet(greeting) {
+  console.log(greeting + ", " + this.name);
+}
+
+let person1 = { name: "John" };
+greet.call(person1, "Hello");
+
+// using apply()
+function greet(greeting) {
+  console.log(greeting + ", " + this.name);
+}
+let person2 = { name: "John" };
+
+greet.apply(person2, ["Hello"]);
+
+// using bind()
+function greet(greeting) {
+  console.log(greeting + ", " + this.name);
+}
+
+let person3 = { name: "John" };
+let greetJohn = greet.bind(person3, "Hello");
+greetJohn();
+
+function printAge() {
+  console.log(this.age);
+}
+const student = { age: 20 };
+let age = printAge.bind(student);
+age();
+
+///currying using bind()
+let multiply = function (x, y) {
+  console.log(x * y);
+};
+const multiplyTwo = multiply.bind(this, 2);
+const multiplyThree = multiply.bind(this, 3);
+multiplyTwo(5);
+multiplyThree(9);
+// currying using function closures
+const add = function (x) {
+  return function (y) {
+    console.log(x + y);
+  };
+};
+const addTwo = add(2);
+addTwo(5);
+const addThree = add(3);
+addThree(5);
